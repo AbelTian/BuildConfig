@@ -67,15 +67,15 @@
             "ANDROID_NDK_PLATFORM": "android-23",
             "NDK_TOOLCHAIN_PATH": "${ndk.arm.bin}",
             "NDK_TOOLS_PREFIX": "arm-linux-androideabi",
-            "PYMAKE_MYNAME": "T.D.R",
-            "a_special_var_const": "hello world",
-            "QKIT": "Android",
-            "QSYS": "Android-Arm",
             "QTDIR": "${qt5.8.android_arm}",
             "QTSPEC": "android-g++",
             "QTCONFIG": "",
             "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
+            "PYMAKE_MYNAME": "T.D.R",
+            "a_special_var_const": "hello world",
+            "QKIT": "Android",
+            "QSYS": "Android"
         },
         "android.x86": {
             "path+": [
@@ -99,13 +99,13 @@
             "ANDROID_NDK_PLATFORM": "android-23",
             "NDK_TOOLCHAIN_PATH": "${ndk.x86.bin}",
             "NDK_TOOLS_PREFIX": "i686-linux-android",
-            "QKIT": "Android",
-            "QSYS": "Android",
             "QTDIR": "${qt5.8.android_x86}",
             "QTSPEC": "android-g++",
             "QTCONFIG": "x86",
             "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
+            "QKIT": "ANDROIDX86",
+            "QSYS": "Android_x86"
         },
         "qt.android": {
             "path+": [
@@ -128,13 +128,13 @@
             "ANDROID_NDK_PLATFORM": "android-23",
             "NDK_TOOLCHAIN_PATH": "${ndk.arm.bin}",
             "NDK_TOOLS_PREFIX": "i686-linux-android",
-            "QKIT": "macOS",
-            "QSYS": "MacOS",
             "QTDIR": "${qt5.9.clang}",
             "QTSPEC": "macx-clang",
             "QTCONFIG": "x86_64",
             "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
+            "QKIT": "macOS",
+            "QSYS": "MacOS"
         },
         "current": "qt.android"
     },
@@ -195,18 +195,24 @@
     "command": {
         "qqt.build": [
             "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
-            "build=/Users/abel/Develop/c0-buildstation/qqt-test-env/${QSYS}/Release",
+            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Release",
             "mkdir -p $build",
             "cd $build",
             "echo build $(pwd)",
             "qmake $src -spec ${QTSPEC} CONFIG+=${QTCONFIG} && make qmake_all",
             "make -j4",
-            "build=/Users/abel/Develop/c0-buildstation/qqt-test-env/${QSYS}/Debug",
+            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Debug",
             "mkdir -p $build",
             "cd $build",
             "echo build $(pwd)",
             "qmake $src -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && make qmake_all",
             "make -j4"
+        ],
+        "qqt.clean": [
+            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
+            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Release",
+            "cd $build",
+            "make clean"
         ],
         "qt": [
             "cd ${root.build}",

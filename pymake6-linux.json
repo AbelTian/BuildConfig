@@ -132,15 +132,15 @@
             "ANDROID_NDK_PLATFORM": "android-23",
             "NDK_TOOLCHAIN_PATH": "${ndk.arm.bin}",
             "NDK_TOOLS_PREFIX": "arm-linux-androideabi",
+            "QTDIR": "${qt5.9.android_arm}",
+            "QTSPEC": "android-g++",
+            "QTCONFIG": "",
+            "JAVA_HOME": "${java1.8.home}",
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
             "PYCMD_MYNAME": "T.D.R",
             "a_special_var_const": "hello world",
             "QKIT": "Android",
-            "QSYS": "Android-arm",
-            "QTDIR": "${qt5.9.android_arm}",
-            "QTSPEC": "android-g++",
-            "QTCONFIG": "arm",
-            "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "QSYS": "Android"
         },
         "android.x86": {
             "path+": [
@@ -166,13 +166,13 @@
             "NDK_TOOLS_PREFIX": "i686-linux-android",
             "PYCMD_MYNAME": "T.D.R",
             "a_special_var_const": "hello world",
-            "QKIT": "Android",
-            "QSYS": "Android",
             "QTDIR": "${qt5.9.android_x86}",
             "QTSPEC": "android-g++",
-            "QTCONFIG": "arm",
+            "QTCONFIG": "",
             "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
+            "QKIT": "ANDROIDX86",
+            "QSYS": "Android_x86"
         },
         "qt.android": {
             "path+": [
@@ -196,15 +196,15 @@
             "ANDROID_NDK_PLATFORM": "android-23",
             "NDK_TOOLCHAIN_PATH": "${ndk.x86.bin}",
             "NDK_TOOLS_PREFIX": "i686-linux-android",
-            "PYCMD_MYNAME": "T.D.R",
-            "a_special_var_const": "hello world",
-            "QKIT": "Linux",
-            "QSYS": "Linux",
             "QTDIR": "${qt5.8.gcc_64}",
             "QTSPEC": "linux-g++",
             "QTCONFIG": "x86_64",
             "JAVA_HOME": "${java1.8.home}",
-            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar"
+            "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
+            "PYCMD_MYNAME": "T.D.R",
+            "a_special_var_const": "hello world",
+            "QKIT": "LINUX",
+            "QSYS": "Linux"
         },
         "current": "qt.android"
     },
