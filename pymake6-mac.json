@@ -2,7 +2,7 @@
     "path-assemblage": {
         "root": "/Users/abel/Develop",
         "root.src": "${root}/a0-develop",
-        "root.prod": "${root}/b1-product",
+        "root.prod": "${root}/d1-product",
         "root.tool": "${root}/b0-toolskits",
         "root.build": "${root}/c0-buildstation",
         "root.test": "${root}/c2-test",
@@ -215,7 +215,6 @@
             "make clean"
         ],
         "qt": [
-            "cd ${root.build}",
             "open \"/Applications/Qt Creator.app\""
         ],
         "android": [
