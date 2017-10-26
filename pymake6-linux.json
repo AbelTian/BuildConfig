@@ -206,7 +206,10 @@
             "QKIT": "LINUX",
             "QSYS": "Linux"
         },
-        "current": "qt.android"
+        "default": {
+            "path+": []
+        },
+        "current": "default"
     },
     "command": {
         "qqt.build": [
@@ -223,6 +226,16 @@
             "echo build $(pwd)",
             "qmake $src -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && make qmake_all",
             "make -j4"
+        ],
+        "qt4.build": [
+            "src=/home/abel/Develop/b0-toolkits/qt-everywhere-opensource-src-4.8.7",
+            "build=/home/abel/Develop/c0-buildstation/qt",
+            "install=/home/abel/Develop/b0-toolkits/Qt/4.8.7",
+            "mkdir -p $build",
+            "cd $build",
+            "$src/configure -prefix $install",
+            "make -j4",
+            "make install"
         ],
         "qt-creator": [
             "cd ${root.build}",
