@@ -10,14 +10,14 @@ Multi-environ Manager就是操作这些个配置文件的工具，
 这个工具的工作目录会一直停留在sourceroot文件夹里，（当然执行命令中的切换目录还是会切换的）。  
 在Shell中使用时这样的：
 ```bash
+#pymake6.py
 #env effect
-mm set env cur 'android.x86'
-mm export
-source $(mm source root)/env_effect.sh
+mm export 'android.x86' envname
+source $(mm source root)/envname_effect.sh
 #do command in this env
 java -version
 #env reset (need)
-source $(mm source root)/env_unset.sh
+source $(mm source root)/envname_unset.sh
 ```
 或者
 ```bash

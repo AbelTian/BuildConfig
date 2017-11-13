@@ -11,6 +11,8 @@
         "cmake.bin": "${cc}/CMake.app/Contents/bin",
         "qt": "${root.tool}/macLibraries/Qt",
         "qt5.9.version": "5.9.2",
+        "qt5.9.ios": "${qt}/${qt5.9.version}/ios",
+        "qt5.9.ios.bin": "${qt}/${qt5.9.version}/ios/bin",
         "qt5.9.clang": "${qt}/${qt5.9.version}/clang_64",
         "qt5.9.clang.bin": "${qt}/${qt5.9.version}/clang_64/bin",
         "qt5.9.android_arm": "${qt}/${qt5.9.version}/android_armv7",
@@ -118,13 +120,25 @@
             "QKIT": "ANDROIDX86",
             "QSYS": "Android_x86"
         },
+        "iOS": {
+            "path+": [
+                "${cmake.bin}",
+                "${qt5.9.ios.bin}"
+            ],
+            "QTVERSION": "${qt5.9.version}",
+            "QTDIR": "${qt5.9.ios}",
+            "QTSPEC": "-spec macx-ios-clang",
+            "QTCONFIG": "CONFIG+=iphoneos CONFIG+=device -after QMAKE_MAC_XCODE_SETTINGS+=qteam qteam.name=DEVELOPMENT_TEAM qteam.value=4EGMLT3G6T",
+            "QKIT": "iOS",
+            "QSYS": "iOS"
+        },
         "iOSSimulator": {
             "path+": [
                 "${cmake.bin}",
-                "${qt5.9.clang.bin}"
+                "${qt5.9.ios.bin}"
             ],
             "QTVERSION": "${qt5.9.version}",
-            "QTDIR": "${qt5.9.clang}",
+            "QTDIR": "${qt5.9.ios}",
             "QTSPEC": "-spec macx-ios-clang",
             "QTCONFIG": "CONFIG+=iphonesimulator CONFIG+=simulator",
             "QKIT": "iOSSimulator",
@@ -211,12 +225,37 @@
         "${qt5.path.source}/configure -prefix ${qt5.path.install} -hostprefix ${qt5.path.install} -xplatform android-g++ -release -nomake tests -nomake examples -android-ndk $ANDROID_NDK_ROOT -android-sdk $ANDROID_SDK_ROOT -android-ndk-host $ANDROID_NDK_HOST -android-toolchain-version $ANDROID_NDK_TOOLCHAIN_VERSION -skip qtwebkit-examples -no-warnings-are-errors"
     ],
     "command": {
+        "daily.qqt": [
+            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src=$src_path/QQt.pro",
+            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
+            "mkdir -p $build",
+            "cd $build",
+            "rm -rf src examples",
+            "rm -rf $src_path/sdk",
+            "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=debug CONFIG+=qml_debug && make qmake_all",
+            "make -j4"
+        ],
+        "daily.qqt.release": [
+            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src=$src_path/QQt.pro",
+            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
+            "mkdir -p $build",
+            "cd $build",
+            "rm -rf src examples",
+            "rm -rf $src_path/sdk",
+            "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
+            "make -j4"
+        ],
         "build.qqt": [
+            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
             "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "mkdir -p $build",
             "cd $build",
             "echo build $(pwd)",
+            "rm -rf src/bin",
+            "rm -rf $src_path/sdk",
             "qmake $src ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && make qmake_all",
             "make -j4",
             "exit 0",
@@ -228,6 +267,12 @@
             "make -j4"
         ],
         "clean.qqt": [
+            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
+            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Debug",
+            "cd $build",
+            "make clean"
+        ],
+        "clean.qqt.release": [
             "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
             "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Release",
             "cd $build",
@@ -268,7 +313,25 @@
             "make -j4",
             "make install"
         ],
-        "android": [
+        "build soap": [
+            "src=/Users/abel/Develop/c1-webrc/qt-solutions/qtsoap",
+            "build=/Users/abel/Develop/c0-buildstation/qtsoap",
+            "install=/Users/abel/Develop/d1-product/QtSoap",
+            "cd $build",
+            "${src}/configure -library"
+        ],
+        "push.qqt": [
+            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "cd $src",
+            "git push",
+            "git push --tag"
+        ],
+        "pull.qqt": [
+            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "cd $src",
+            "git pull"
+        ],
+        "android.sdk": [
             "/Users/abel/Develop/b0-toolskits/macAndroidLibraries/android-sdk-macosx/tools/android"
         ]
     }
