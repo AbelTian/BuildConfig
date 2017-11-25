@@ -151,7 +151,7 @@
             ],
             "QTVERSION": "${qt4.version}",
             "QTDIR": "${qt4.8.clang}",
-            "QTSPEC": "-spec macx-g++",
+            "QTSPEC": "-spec macx-llvm",
             "QTCONFIG": "CONFIG+=x86_64",
             "QKIT": "macOS",
             "QSYS": "MacOS"
@@ -232,7 +232,7 @@
             "mkdir -p $build",
             "cd $build",
             "rm -rf src examples",
-            "rm -rf $src_path/sdk",
+            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=debug CONFIG+=qml_debug && make qmake_all",
             "make -j4"
         ],
@@ -243,7 +243,7 @@
             "mkdir -p $build",
             "cd $build",
             "rm -rf src examples",
-            "rm -rf $src_path/sdk",
+            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Release",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
             "make -j4"
         ],
@@ -254,27 +254,31 @@
             "mkdir -p $build",
             "cd $build",
             "echo build $(pwd)",
-            "rm -rf src/bin",
-            "rm -rf $src_path/sdk",
+            "rm -rf src/bin examples/*/bin",
+            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake $src ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && make qmake_all",
-            "make -j4",
-            "exit 0",
-            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Relase",
+            "make -j4"
+        ],
+        "build.qqt.release": [
+            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src=$src_path/QQt.pro",
+            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "mkdir -p $build",
             "cd $build",
-            "echo build $(pwd)",
-            "qmake $src ${QTSPEC} ${QTCONFIG} && make qmake_all",
+            "rm -rf src/bin examples/*/bin",
+            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Release",
+            "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
             "make -j4"
         ],
         "clean.qqt": [
             "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
-            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Debug",
+            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "cd $build",
             "make clean"
         ],
         "clean.qqt.release": [
             "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
-            "build=/Users/abel/Develop/c0-buildstation/a0-qqtfoundation/${QSYS}/Release",
+            "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "cd $build",
             "make clean"
         ],
