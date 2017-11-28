@@ -11,6 +11,7 @@
         "cmake": "${cc}/CMake.app/Contents",
         "cmake.bin": "${cmake}/MacOS",
         "qt": "${root.tool}/Qt",
+        "qt5.9.version": "5.9.1",
         "qt5.9.clang": "${qt}/5.9.1/clang_64",
         "qt5.9.clang.bin": "${qt5.9.clang}/bin",
         "qt5.9.gcc_64": "${qt}/5.9.1/gcc_64",
@@ -32,10 +33,13 @@
         "qt5.7.gcc_64": "${qt}/5.7.1/gcc_64",
         "qt5.7.android_x86": "${qt}/5.7/android_x86",
         "qt5.7.android_arm": "${qt}/5.7/android_armv7",
+        "qt4.8.version": "4.8.7",
         "qt4.8.clang": "${qt}/4.8.7/clang_64",
         "qt4.8.clang.bin": "${qt4.8.clang}/bin",
         "qt4.8.gcc_64": "${qt}/4.8.7/gcc_64",
         "qt4.8.gcc_64.bin": "${qt4.8.gcc_64}/bin",
+        "qt4.8.mips32": "${qt}/4.8.7/gcc_64",
+        "qt4.8.mips32.bin": "${qt4.8.gcc_64}/bin",
         "android": "${root.tool}/linuxAndroidLibraries",
         "android.sdk": "${android}/android-sdk-macosx",
         "android.ndk": "${android}/android-ndk-r13b",
@@ -208,22 +212,24 @@
             "QKIT": "LINUX",
             "QSYS": "Linux"
         },
-        "mips32":{
+        "mips32": {
             "path+": [
                 "${cmake.bin}",
                 "${qt4.8.mips32.bin}"
             ],
+            "QTVERSION": "${qt4.8.version}",
             "QTDIR": "${qt4.8.mips32}",
             "QTSPEC": "-spec qws/linux-mips-g++",
             "QTCONFIG": "",
             "QKIT": "MIPS32",
             "QSYS": "Mips32"
         },
-        "qt4":{
+        "qt4": {
             "path+": [
                 "${cmake.bin}",
                 "${qt4.8.gcc_64.bin}"
             ],
+            "QTVERSION": "${qt4.8.version}",
             "QTDIR": "${qt4.8.gcc_64}",
             "QTSPEC": "-spec linux-g++",
             "QTCONFIG": "CONFIG+=x86_64",
@@ -235,13 +241,14 @@
                 "${cmake.bin}",
                 "${qt5.9.gcc_64.bin}"
             ],
+            "QTVERSION": "${qt5.9.version}",
             "QTDIR": "${qt5.9.gcc_64}",
             "QTSPEC": "-spec linux-g++",
             "QTCONFIG": "CONFIG+=x86_64",
             "QKIT": "LINUX64",
             "QSYS": "Linux64"
         },
-        "current": "qt5"
+        "current": "qt4"
     },
     "command": {
         "daily.qqt": [
@@ -250,7 +257,7 @@
             "build=/home/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "mkdir -p $build",
             "cd $build",
-            "rm -rf src examples",
+            "rm -rf ./*",
             "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=debug && make qmake_all",
             "make -j4"
@@ -261,7 +268,7 @@
             "build=/home/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "mkdir -p $build",
             "cd $build",
-            "rm -rf src examples",
+            "rm -rf ./*",
             "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Release",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
             "make -j4"

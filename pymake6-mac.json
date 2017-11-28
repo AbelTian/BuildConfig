@@ -168,7 +168,7 @@
             "QKIT": "macOS",
             "QSYS": "MacOS"
         },
-        "current": "macOS"
+        "current": "qt4"
     },
     "variable-assemblage": [
         "QQt",
