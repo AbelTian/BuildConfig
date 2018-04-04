@@ -168,11 +168,11 @@
             "QKIT": "macOS",
             "QSYS": "MacOS"
         },
-        "current": "qt4"
+        "current": "android.mobile"
     },
     "variable-assemblage": [
         "QQt",
-        "a0-qqtfoundation",
+        "LibQQt",
         "${root.build}/${qqt.proj.name}/${qt.sys.mac}/${build.release}",
         "${root.src}/${qqt.proj.name}",
         "${qqt.proj.name}.pro",
@@ -226,7 +226,7 @@
     ],
     "command": {
         "daily.qqt": [
-            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src_path=/Users/abel/Develop/a0-develop/LibQQt",
             "src=$src_path/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "mkdir -p $build",
@@ -237,7 +237,7 @@
             "make -j4"
         ],
         "daily.qqt.release": [
-            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src_path=/Users/abel/Develop/a0-develop/LibQQt",
             "src=$src_path/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "mkdir -p $build",
@@ -248,8 +248,8 @@
             "make -j4"
         ],
         "build.qqt": [
-            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
-            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/QQt.pro",
+            "src_path=/Users/abel/Develop/a0-develop/LibQQt",
+            "src=/Users/abel/Develop/a0-develop/LibQQt/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "mkdir -p $build",
             "cd $build",
@@ -260,7 +260,7 @@
             "make -j4"
         ],
         "build.qqt.release": [
-            "src_path=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src_path=/Users/abel/Develop/a0-develop/LibQQt",
             "src=$src_path/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "mkdir -p $build",
@@ -271,13 +271,13 @@
             "make -j4"
         ],
         "clean.qqt": [
-            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
+            "src=/Users/abel/Develop/a0-develop/LibQQt/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
             "cd $build",
             "make clean"
         ],
         "clean.qqt.release": [
-            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation/a0-qqtfoundation.pro",
+            "src=/Users/abel/Develop/a0-develop/LibQQt/QQt.pro",
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "cd $build",
             "make clean"
@@ -325,15 +325,27 @@
             "${src}/configure -library"
         ],
         "push.qqt": [
-            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src=/Users/abel/Develop/a0-develop/LibQQt",
             "cd $src",
             "git push",
             "git push --tag"
         ],
         "pull.qqt": [
-            "src=/Users/abel/Develop/a0-develop/a0-qqtfoundation",
+            "src=/Users/abel/Develop/a0-develop/LibQQt",
             "cd $src",
             "git pull"
+        ],
+        "cloc.qqt": [
+            "src=/Users/abel/Develop/a0-develop/LibQQt",
+            "cd $src",
+            "perl /Users/abel/Develop/b1-buildshell/cloc-1.74.pl  .",
+            "date"
+        ],
+        "cloc.light": [
+            "src=/Users/abel/Develop/a0-develop/LightUnderWater/App",
+            "cd $src",
+            "perl /Users/abel/Develop/b1-buildshell/cloc-1.74.pl  .",
+            "date"
         ],
         "android.sdk": [
             "/Users/abel/Develop/b0-toolskits/macAndroidLibraries/android-sdk-macosx/tools/android"
