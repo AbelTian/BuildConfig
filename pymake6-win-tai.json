@@ -10,7 +10,7 @@
         "cc": "${root.tool}/compiler",
         "cmake": "${cc}/CMake.app/Contents",
         "cmake.bin": "${cmake}/MacOS",
-        "qt": "${root.tool}/Qt",
+        "qt": "${root.tool}/winLibraries/Qt",
         "qt5.9.version": "5.9.2",
         "qt4.version": "4.8.6",
         "qt4.8.mingw32": "${qt}/4.8.6/mingw32",
@@ -45,7 +45,7 @@
         "mingw32": "${qt}/mingw530_32",
         "mingw32.bin": "${mingw32}/bin",
         "android": "${root.tool}/winAndroidLibraries",
-        "android.sdk": "${android}/android-sdk-linux",
+        "android.sdk": "${android}/android-sdk-windows",
         "android.ndk": "${android}/android-ndk-r13b",
         "android.ant": "${android}/apache-ant-1.10.1",
         "android.java": "${android}/Java",
@@ -124,7 +124,7 @@
         "android.mobile": {
             "path+": [
                 "${cmake.bin}",
-                "${qt5.8.android_arm.bin}",
+                "${qt5.9.android_arm.bin}",
                 "${mingw32.bin}",
                 "${java1.8.bin}",
                 "${android.sdk}",
@@ -150,7 +150,7 @@
             "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
             "PYCMD_MYNAME": "T.D.R",
             "a_special_var_const": "hello world",
-            "QKIT": "Android",
+            "QKIT": "ANDROID",
             "QSYS": "Android"
         },
         "android.x86": {
@@ -243,10 +243,10 @@
             "QKIT": "WIN64",
             "QSYS": "Win64"
         },
-        "current": "qt.android"
+        "current": "android.mobile"
     },
     "command": {
-        "daily.qqt":[
+        "daily.qqt": [
             "set src_path=%root%/a0-develop/LibQt",
             "set src=%src_path%/QQt.pro",
             "set build=C:/Users/Administrator/Develop/c0-build/QQt/${QSYS}/Debug",
@@ -256,7 +256,6 @@
             "rm -rf %src_path%/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
             "mingw32-make -j4",
-
             "src_path=/home/abel/Develop/a0-develop/LibQt",
             "src=$src_path/QQt.pro",
             "build=/home/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
@@ -274,7 +273,6 @@
             "cd /d %build%",
             "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
             "mingw32-make -j4",
-
             "set build=${root}/c0-buildstation/a0-qqtfoundation/${QSYS}/Debug",
             "md %build:/=\\%",
             "cd /d %build%",
