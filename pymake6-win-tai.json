@@ -240,7 +240,7 @@
             "QTVERSION": "${qt5.9.version}",
             "QTDIR": "${qt5.9.mingw32}",
             "QTSPEC": "-spec win32-g++",
-            "QTCONFIG": "CONFIG+=x86",
+            "QTCONFIG": "",
             "QKIT": "WIN32",
             "QSYS": "Windows"
         },
@@ -248,31 +248,29 @@
     },
     "command": {
         "daily.qqt": [
-            "set src_path=%root.src%/LibQQt",
-            "set src=%src_path%/QQt.pro",
-            "set build=%root.build%/QQt/${QTVERSION}/${QSYS}/Debug",
-            "md %build:/=\\%",
-            "cd /d %build%",
-            "rm -rf *",
-            "rm -rf %src_path%/../QQt/${QTVERSION}/${QSYS}/Debug",
-            "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
-            "mingw32-make -j4",
-            "set build=%root.build%/QQt/${QTVERSION}/${QSYS}/Release",
-            "md %build:/=\\%",
-            "cd /d %build%",
-            "rm -rf *",
-            "rm -rf %src_path%/../QQt/${QTVERSION}/${QSYS}/Release",
-            "qmake %src% -spec ${QTSPEC} CONFIG+=release CONFIG+=qml_release CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
-            "mingw32-make -j4"
-        ],
-        "qqt.build": [
             "set src_path=${root.src}/LibQQt",
             "set src=%src_path%/QQt.pro",
             "set build=${root.build}/QQt/${QTVERSION}/${QSYS}/Debug",
             "md %build:/=\\%",
             "cd /d %build%",
+            "del /f /q /s demo examples src test",
             "qmake %src% ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && mingw32-make qmake_all",
-            "rem mingw32-make -j4"
+            "mingw32-make -j20",
+            "set build=${root.build}/QQt/${QTVERSION}/${QSYS}/Release",
+            "md %build:/=\\%",
+            "cd /d %build%",
+            "del /f /q /s demo examples src test",
+            "qmake %src% ${QTSPEC} CONFIG+=release CONFIG+=qml_release ${QTCONFIG} && mingw32-make qmake_all",
+            "mingw32-make -j20"
+        ],
+        "qqt.build": [
+            "set src_path=${root.src}/LibQQt",
+            "set src=%src_path%/QQt.pro",
+            "set build=${root.build}/QQt/${QTVERSION}/${QSYS}/Debug",
+            "rem md %build:/=\\%",
+            "cd /d %build%",
+            "qmake %src% ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && mingw32-make qmake_all",
+            "mingw32-make -j20"
         ],
         "qt-creator": [
             "cd ${root.build}",
