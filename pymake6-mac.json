@@ -2,12 +2,12 @@
     "path-assemblage": {
         "root": "/Users/abel/Develop",
         "root.src": "${root}/a0-develop",
-        "root.prod": "${root}/d1-product",
+        "root.prod": "${root}/d0-product",
         "root.tool": "${root}/b0-toolskits",
         "root.build": "${root}/c0-buildstation",
-        "root.test": "${root}/c2-test",
-        "root.webrc": "${root}/c1-webrc",
-        "cc": "${root.tool}/compiler",
+        "root.test": "${root}/f0-test",
+        "root.webrc": "${root}/e0-webrc",
+        "cc": "${root.tool}/a0-compiler",
         "cmake.bin": "${cc}/CMake.app/Contents/bin",
         "qt": "${root.tool}/macLibraries/Qt",
         "qt5.9.version": "5.9.2",
@@ -168,7 +168,7 @@
             "QKIT": "macOS",
             "QSYS": "MacOS"
         },
-        "current": "android.mobile"
+        "current": "macOS"
     },
     "variable-assemblage": [
         "QQt",
@@ -232,7 +232,6 @@
             "mkdir -p $build",
             "cd $build",
             "rm -rf src examples",
-            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=debug CONFIG+=qml_debug && make qmake_all",
             "make -j4"
         ],
@@ -243,7 +242,6 @@
             "mkdir -p $build",
             "cd $build",
             "rm -rf src examples",
-            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Release",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
             "make -j4"
         ],
@@ -254,9 +252,7 @@
             "mkdir -p $build",
             "cd $build",
             "echo build $(pwd)",
-            "rm -rf src/bin examples/*/bin",
-            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
-            "qmake $src ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && make qmake_all",
+            "qmake ${src} ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && make qmake_all",
             "make -j4"
         ],
         "build.qqt.release": [
@@ -265,8 +261,6 @@
             "build=/Users/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Release",
             "mkdir -p $build",
             "cd $build",
-            "rm -rf src/bin examples/*/bin",
-            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Release",
             "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=release && make qmake_all",
             "make -j4"
         ],
