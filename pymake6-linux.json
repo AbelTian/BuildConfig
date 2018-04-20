@@ -38,8 +38,10 @@
         "qt4.8.clang.bin": "${qt4.8.clang}/bin",
         "qt4.8.gcc_64": "${qt}/4.8.7/gcc_64",
         "qt4.8.gcc_64.bin": "${qt4.8.gcc_64}/bin",
-        "qt4.8.mips32": "${qt}/4.8.7/gcc_64",
-        "qt4.8.mips32.bin": "${qt4.8.gcc_64}/bin",
+        "qt4.8.mips32": "${qt}/4.8.5/mips32/disk2/ylguo/ingenic_buildroot/output/host/usr",
+        "qt4.8.mips32.bin": "${qt4.8.mips32}/bin",
+        "qt4.8.arm32": "${qt}/4.8.5/mips32/disk2/ylguo/ingenic_buildroot/output/host/usr",
+        "qt4.8.arm32.bin": "${qt4.8.arm32}/bin",
         "android": "${root.tool}/linuxAndroidLibraries",
         "android.sdk": "${android}/android-sdk-macosx",
         "android.ndk": "${android}/android-ndk-r13b",
@@ -217,12 +219,24 @@
                 "${cmake.bin}",
                 "${qt4.8.mips32.bin}"
             ],
-            "QTVERSION": "${qt4.8.version}",
+            "QTVERSION": "4.8.5",
             "QTDIR": "${qt4.8.mips32}",
             "QTSPEC": "-spec qws/linux-mips-g++",
             "QTCONFIG": "",
             "QKIT": "MIPS32",
             "QSYS": "Mips32"
+        },
+        "arm32": {
+            "path+": [
+                "${cmake.bin}",
+                "${qt4.8.arm32.bin}"
+            ],
+            "QTVERSION": "${qt4.8.version}",
+            "QTDIR": "${qt4.8.arm32}",
+            "QTSPEC": "-spec qws/linux-arm-gnueabi-g++",
+            "QTCONFIG": "",
+            "QKIT": "ARM32",
+            "QSYS": "Arm32"
         },
         "qt4": {
             "path+": [
