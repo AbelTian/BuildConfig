@@ -5,8 +5,8 @@
         "root.prod": "${root}/d0-product",
         "root.tool": "${root}/b0-toolkits",
         "root.build": "${root}/c0-buildstation",
-        "root.test": "${root}/e1-test",
-        "root.webrc": "${root}/b2-webrc",
+        "root.test": "${root}/e3-test",
+        "root.webrc": "${root}/e2-webrc",
         "cc": "${root.tool}/compiler",
         "cmake": "${cc}/CMake.app/Contents",
         "cmake.bin": "${cmake}/MacOS",
@@ -42,7 +42,7 @@
         "qt5.7.android_arm": "${qt}/5.7/android_armv7",
         "qt4.8.clang": "${qt}/${qt4.version}/clang_64",
         "qt4.8.clang.bin": "${qt4.8.clang}/bin",
-        "mingw32": "${qt}/mingw530_32",
+        "mingw32": "${qt}/Tools/mingw530_32",
         "mingw32.bin": "${mingw32}/bin",
         "android": "${root.tool}/winAndroidLibraries",
         "android.sdk": "${android}/android-sdk-windows",
@@ -234,50 +234,45 @@
         "qt5": {
             "path+": [
                 "${cmake.bin}",
+                "${mingw32.bin}",
                 "${qt5.9.mingw32.bin}"
             ],
             "QTVERSION": "${qt5.9.version}",
             "QTDIR": "${qt5.9.mingw32}",
             "QTSPEC": "-spec win32-g++",
             "QTCONFIG": "CONFIG+=x86",
-            "QKIT": "WIN64",
-            "QSYS": "Win64"
+            "QKIT": "WIN32",
+            "QSYS": "Windows"
         },
-        "current": "android.mobile"
+        "current": "qt5"
     },
     "command": {
         "daily.qqt": [
-            "set src_path=%root%/a0-develop/LibQt",
+            "set src_path=%root.src%/LibQQt",
             "set src=%src_path%/QQt.pro",
-            "set build=C:/Users/Administrator/Develop/c0-build/QQt/${QSYS}/Debug",
+            "set build=%root.build%/QQt/${QTVERSION}/${QSYS}/Debug",
             "md %build:/=\\%",
             "cd /d %build%",
             "rm -rf *",
             "rm -rf %src_path%/../QQt/${QTVERSION}/${QSYS}/Debug",
             "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
             "mingw32-make -j4",
-            "src_path=/home/abel/Develop/a0-develop/LibQt",
-            "src=$src_path/QQt.pro",
-            "build=/home/abel/Develop/c0-buildstation/QQt/${QTVERSION}/${QSYS}/Debug",
-            "mkdir -p $build",
-            "cd $build",
-            "rm -rf ./*",
-            "rm -rf ${src_path}/../QQt/${QTVERSION}/${QSYS}/Debug",
-            "qmake $src ${QTSPEC} ${QTCONFIG} CONFIG+=debug && make qmake_all",
-            "make -j4"
+            "set build=%root.build%/QQt/${QTVERSION}/${QSYS}/Release",
+            "md %build:/=\\%",
+            "cd /d %build%",
+            "rm -rf *",
+            "rm -rf %src_path%/../QQt/${QTVERSION}/${QSYS}/Release",
+            "qmake %src% -spec ${QTSPEC} CONFIG+=release CONFIG+=qml_release CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
+            "mingw32-make -j4"
         ],
         "qqt.build": [
-            "set src=${root}/a0-develop/LibQt/QQt.pro",
-            "set build=C:/Users/Administrator/Develop/c0-build/QQt/${QSYS}/Debug",
+            "set src_path=${root.src}/LibQQt",
+            "set src=%src_path%/QQt.pro",
+            "set build=${root.build}/QQt/${QTVERSION}/${QSYS}/Debug",
             "md %build:/=\\%",
             "cd /d %build%",
-            "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
-            "mingw32-make -j4",
-            "set build=${root}/c0-buildstation/a0-qqtfoundation/${QSYS}/Debug",
-            "md %build:/=\\%",
-            "cd /d %build%",
-            "qmake %src% -spec ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug CONFIG+=${QTCONFIG} && mingw32-make qmake_all",
-            "mingw32-make -j4"
+            "qmake %src% ${QTSPEC} CONFIG+=debug CONFIG+=qml_debug ${QTCONFIG} && mingw32-make qmake_all",
+            "rem mingw32-make -j4"
         ],
         "qt-creator": [
             "cd ${root.build}",
