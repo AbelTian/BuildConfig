@@ -184,7 +184,7 @@
             "JAVA_HOME": "${java1.8.home}",
             "CLASSPATH": ".:${JAVA_HOME}/lib/dt/jar:${JAVA_HOME}/lib/tools.jar",
             "QKIT": "ANDROIDX86",
-            "QSYS": "AndroidByWin"
+            "QSYS": "Android_x86"
         },
         "qt.android": {
             "path+": [
