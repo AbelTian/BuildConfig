@@ -1,6 +1,6 @@
 {
     "path-assemblage": {
-        "root": "R:/Develop",
+        "root": "C:/Users/Administrator/Develop",
         "root.src": "${root}/a0-develop",
         "root.prod": "${root}/d0-product",
         "root.sdk": "${root}/d1-product",
@@ -11,7 +11,8 @@
         "cc": "${root.tool}/compiler",
         "cmake": "${cc}/CMake.app/Contents",
         "cmake.bin": "${cmake}/MacOS",
-        "qt": "${root.tool}/winLibraries/Qt",
+        "qt": "${root.tool}/Qt",
+        "qt5.8.version": "5.8.0",
         "qt5.9.version": "5.9.2",
         "qt4.version": "4.8.6",
         "qt4.8.mingw32": "${qt}/${qt4.version}/mingw32",
@@ -32,6 +33,8 @@
         "qt5.8.android_arm.bin": "${qt5.8.android_arm}/bin",
         "qt5.8.mingw32": "${qt}/5.8/mingw53_32",
         "qt5.8.mingw32.bin": "${qt5.8.mingw32}/bin",
+        "qt5.8.msvc": "${qt}/5.8/msvc2015_64",
+        "qt5.8.msvc.bin": "${qt5.8.msvc}/bin",
         "qt5.8.gcc_64": "${qt}/5.8/gcc_64",
         "qt5.8.gcc_64.bin": "${qt5.8.gcc_64}/bin",
         "qt5.8.clang": "${qt}/5.8/clang_64",
@@ -65,7 +68,8 @@
         "ndk.x86_64": "${android.ndk}/toolchains/x86_64-4.9/prebuilt/windows-x86_64",
         "ndk.arm.bin": "${ndk.arm}/bin",
         "ndk.x86.bin": "${ndk.x86}/bin",
-        "ndk.x86_64.bin": "${ndk.x86_64}/bin"
+        "ndk.x86_64.bin": "${ndk.x86_64}/bin",
+        "msvc2015": "C:/Program Files (x86)/Microsoft Visual Studio 14.0/Common7/IDE"
     },
     "variable-assemblage": {
         "qt.sys.mac": "MacOS",
@@ -245,7 +249,24 @@
             "QKIT": "WIN32",
             "QSYS": "Windows"
         },
-        "current": "qt5"
+        "qt5.msvc": {
+            "path+": [
+                "${cmake.bin}",
+                "${mingw32.bin}",
+                "${qt5.8.msvc.bin}"
+            ],
+            "QTVERSION": "${qt5.8.version}",
+            "QTDIR": "${qt5.8.msvc}",
+            "QTSPEC": "-spec win32-msvc2015",
+            "QTCONFIG": "",
+            "BUILDTYPE": "Debug",
+            "QKIT": "WIN64",
+            "QSYS": "Win64",
+            "QQT_BUILD_ROOT":"C:/Users/Administrator/Develop/c0-buildstation",
+            "QQT_SDK_ROOT":"C:/Users/Administrator/Develop/d1-product",
+            "QQT_STD_PWD":"${QTVERSION}/${QSYS}/${BUILDTYPE}"
+        },
+        "current": "qt5.msvc"
     },
     "command": {
         "daily.qqt": [
@@ -276,6 +297,10 @@
         "qt-creator": [
             "cd ${root.build}",
             "\"R:/Develop/b0-toolkits/winLibraries/Qt/Tools/QtCreator/bin/qtcreator.exe\""
+        ],
+         "msvc2015": [
+            "cd /d \"${msvc2015}\"",
+            "start devenv.exe"
         ],
         "qt5.android.build": [
             "mkdir -p ${qt5.build.path}",
