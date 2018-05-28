@@ -8,8 +8,9 @@
         "root.test": "${root}/e3-test",
         "root.webrc": "${root}/e2-webrc",
         "cc": "${root.tool}/compiler",
-        "cmake": "${cc}/CMake.app/Contents",
-        "cmake.bin": "${cmake}/MacOS",
+        "wincc": "${root.tool}/winCompilers",
+        "cmake": "${wincc}/cmake3.9.1_64",
+        "cmake.bin": "${cmake}/bin",
         "qt": "${root.tool}/winLibraries/Qt",
         "qt5.9.version": "5.9.2",
         "qt4.version": "4.8.6",
@@ -283,6 +284,14 @@
         ],
         "adb": [
             "adb devices"
+        ],
+        "cmake":[
+            "start ${cmake.bin}/cmake-gui.exe"
+        ],
+        "build-opencv":[
+            "cd /d R:/Develop/c0-buildstation/opencv2.3.1",
+            "mingw32-make -j 10",
+            "mingw32-make install"
         ],
         "android.sdk.manager": [
             "${android.sdk}/\"SDK Manager.exe\""
