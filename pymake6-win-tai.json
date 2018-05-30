@@ -294,6 +294,28 @@
             "mingw32-make -j 10",
             "mingw32-make install"
         ],
+        "build-opencv-release":[
+            "cd /d R:/Develop/c0-buildstation/opencv2.3.1-release",
+            "mingw32-make -j 10",
+            "mingw32-make install"
+        ],
+        "build-openscenegraph":[
+            "cd /d R:/Develop/c0-buildstation/OpenSceneGraph",
+            "mingw32-make -j 10",
+            "mingw32-make install"
+        ],
+        "test":[
+            "echo %cd%"
+        ],
+        "build-osg-release":[
+            "cd /d R:/Develop/c0-buildstation/OpenSceneGraph_Release",
+            "mingw32-make -j 10",
+            "mingw32-make install"
+        ],
+        "install-qwt":[
+            "cd /d R:/Develop/c0-buildstation/qwt/5.9.2/Windows/Debug",
+            "mingw32-make install"
+        ],
         "android.sdk.manager": [
             "${android.sdk}/\"SDK Manager.exe\""
         ]
