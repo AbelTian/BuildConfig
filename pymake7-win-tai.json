@@ -3,20 +3,32 @@
         "root": "R:/Develop",
         "root.src": "${root}/a0-develop",
         "root.prod": "${root}/d0-product",
-        "root.sdk": "${root}/d1-product",
+        "root.sdk": "${root}/d1-sdk",
         "root.tool": "${root}/b0-toolkits",
         "root.build": "${root}/c0-buildstation",
         "root.test": "${root}/e3-test",
         "root.webrc": "${root}/e2-webrc",
         "cc": "${root.tool}/compiler",
+        "FFmpeg": "${root.sdk}/FFmpeg3/Windows",
+        "FFmpeg.bin": "${FFmpeg}/bin",
+        "FFmpeg.lib": "${FFmpeg}/lib",
+        "FFmpeg.inc": "${FFmpeg}/include/FFmpeg3",
         "wincc": "${root.tool}/winCompilers",
         "cmake": "${wincc}/cmake3.9.1_64",
         "cmake.bin": "${cmake}/bin",
+        "msys.bin": "${root.tool}/winCompilers/mSys/bin",
         "qt": "${root.tool}/winLibraries/Qt",
         "qt5.9.version": "5.9.2",
+        "qt5.5.version": "5.5.1",
+        "qt5.version": "5.9.2",
         "qt4.version": "4.8.6",
         "qt4.8.mingw32": "${qt}/${qt4.version}/mingw32",
         "qt4.8.mingw32.bin": "${qt4.8.mingw32}/bin",
+        "qt5.armhf32": "${qt}/${qt5.version}/mingw53_armhf32",
+        "qt5.armhf32.bin": "${qt5.armhf32}/bin",
+        "qt5.5.armhf32": "${qt}/${qt5.5.version}/armhf32",
+        "qt5.5.armhf32.bin": "${qt5.5.armhf32}/bin",
+        "qt5.5.armhf32.sysroot":"${qt5.5.armhf32}/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi",
         "qt5.9.mingw32": "${qt}/${qt5.9.version}/mingw53_32",
         "qt5.9.mingw32.bin": "${qt5.9.mingw32}/bin",
         "qt5.9.clang": "${qt}/${qt5.9.version}/clang_64",
@@ -46,6 +58,8 @@
         "qt4.8.clang.bin": "${qt4.8.clang}/bin",
         "mingw32": "${qt}/Tools/mingw530_32",
         "mingw32.bin": "${mingw32}/bin",
+        "armhf32": "${qt}/Tools/gcc-linaro-5.4.1-2017.05-i686-mingw32_arm-linux-gnueabihf",
+        "armhf32.bin": "${armhf32}/bin",
         "android": "${root.tool}/winAndroidLibraries",
         "android.sdk": "${android}/android-sdk-windows",
         "android.ndk": "${android}/android-ndk-r13b",
@@ -68,60 +82,6 @@
         "ndk.x86.bin": "${ndk.x86}/bin",
         "ndk.x86_64.bin": "${ndk.x86_64}/bin"
     },
-    "variable-assemblage": {
-        "qt.sys.mac": "MacOS",
-        "qt.sys.android.x86_64": "Android-x86_64",
-        "qt.sys.android.x86": "Android",
-        "qt.sys.android.arm": "Android-arm",
-        "build.debug": "Debug",
-        "build.release": "Release",
-        "qqt.prod.name": "QQt",
-        "qqt.proj.name": "a0-qqtfoundation",
-        "qqt.build.path": "${root.build}/${qqt.proj.name}/${qt.sys.mac}/${build.release}",
-        "qqt.source.path": "${root.src}/${qqt.proj.name}",
-        "qqt.proj.qmake": "${qqt.proj.name}.pro",
-        "qqt.prod.path": "${qqt.build.path}/src/bin",
-        "qqt.install.path": "${root.prod}/QQt",
-        "qqtframe.prod.name": "qqtframe",
-        "qqtframe.bin.path": "${qqt.build.path}/examples/${qqtframe.prod.name}/bin",
-        "qqtframe.dep1": "${qqt.build.path}/src/bin/QQt.framework",
-        "qqtframe.dep1.name": "QQt.framework/Versions/1/QQt",
-        "qt5.source": "${root.tool}/Source/qt5",
-        "qt5.build.path": "${root.build}/qt5",
-        "mac.app": "${prod.name}.app",
-        "mac.app.content": "${mac.app}/Contents",
-        "mac.app.macos": "${mac.app.content}/MacOS",
-        "mac.app.framework": "${mac.app.content}/Frameworks",
-        "mac.app.res": "${mac.app.content}/Resources",
-        "mac.app.plugin": "${mac.app.content}/PlugIns",
-        "mac.framework": "${prod.name}.framework",
-        "mac.framework.ver": "${prod.name}.framework/Versions",
-        "mac.framework.res": "${prod.name}.framework/Resources",
-        "qt.deploy.android": "androiddeployqt",
-        "qt.deploy.mac": "macdeployqt"
-    },
-    "command-assemblage": [
-        "I'm not similar to these command, so list them here, rather than forgotten them",
-        "cl-command, sys-command",
-        "replace? no, append? easy!",
-        "help you to remeber these command.",
-        "mkdir -p ${qqt.build.path}",
-        "cd ${build-path}",
-        "cmake -G\"Unix Makefiles\" -DCMAKE_INSTALL_PREFIX=${prod-root} ${source-path}",
-        "cmake -GXCode -DCMAKE_INSTALL_PREFIX=${prod-root} ${source-path}",
-        "rm -f CMakeCache.txt",
-        "qmake ${source-path}/${qmake-file} -spec ${QTSPEC} CONFIG+=${QTCONFIG} && make qmake_all",
-        "make -j4",
-        "make clean in ${build-path}",
-        "make install",
-        "${deployqt} ${bin-path}/${app-bundle} -verbose=1",
-        "${deployqt} -dmg",
-        "${deployqt} --help",
-        "cp -fr ${lib-dep} ${lib-native}",
-        "install_name_tool -change ${lib-dep-name} @rpath/${lib-dep-name} ${app-native}/${prod-name} ",
-        "install_name_tool -change $LibDep @rpath/$LibDep ${app-native}/${prod-name} ",
-        "${source-path}/configure -prefix ${install-path} -hostprefix ${install-path} -xplatform android-g++ -release -nomake tests -nomake examples -android-ndk $ANDROID_NDK_ROOT -android-sdk $ANDROID_SDK_ROOT -android-ndk-host $ANDROID_NDK_HOST -android-toolchain-version $ANDROID_NDK_TOOLCHAIN_VERSION -skip qtwebkit-examples -no-warnings-are-errors"
-    ],
     "environ": {
         "android.mobile": {
             "path+": [
@@ -224,9 +184,10 @@
         "qt4": {
             "path+": [
                 "${cmake.bin}",
+                "${mingw32.bin}",
                 "${qt4.8.mingw32.bin}"
             ],
-            "QTVERSION": "${qt4.8.version}",
+            "QTVERSION": "${qt4.version}",
             "QTDIR": "${qt4.8.mingw32}",
             "QTSPEC": "-spec win32-g++",
             "QTCONFIG": "CONFIG+=x86",
@@ -246,11 +207,50 @@
             "QKIT": "WIN32",
             "QSYS": "Windows"
         },
-        "current": "qt5"
+        "FFmpeg": {
+            "path+": [
+                "${msys.bin}",
+                "${FFmpeg.bin}",
+                "${FFmpeg.lib}",
+                "${FFmpeg.inc}",
+                "${cmake.bin}",
+                "${mingw32.bin}",
+                "${qt5.9.mingw32.bin}"
+            ],
+            "QTVERSION": "${qt5.9.version}",
+            "QTDIR": "${qt5.9.mingw32}",
+            "QTSPEC": "-spec win32-g++",
+            "QTCONFIG": "",
+            "QKIT": "WIN32",
+            "QSYS": "Windows"
+        },
+        "armhf32": {
+            "path+": [
+                "${cmake.bin}",
+                "${armhf32.bin}",
+                "${qt5.armhf32.bin}",
+                "${mingw32.bin}",
+                "${msys.bin}"
+           ],
+            "QTVERSION": "${qt5.version}",
+            "QTDIR": "${qt5.armhf32}",
+            "QTSPEC": "-spec linux-arm-gnueabihf-g++",
+            "QTCONFIG": "",
+            "QKIT": "Armhf32",
+            "QSYS": "Armhf32"
+        },
+        "current": "armhf32"
     },
     "command": {
         "ccc": [
             "echo %QTDIR%"
+        ],
+        "configure.qt.armhf32":[
+            "set src_path=${root.webrc}/qt-everywhere-opensource-src-5.9.2",
+            "set build=${root.build}/Qt5/${QTVERSION}/${QSYS}/Debug",
+            "md %build:/=\\%",
+            "cd /d %build%",
+            "%src_path%/configure -opensource -confirm-license -shared --sysroot=${qt5.5.armhf32.sysroot} --prefix=/usr/Qt5.9.2 -xplatform linux-arm-gnueabihf-g++ -nomake tests -nomake examples -no-warnings-are-errors"
         ],
         "daily.qqt": [
             "set src_path=${root.src}/LibQQt",
@@ -291,6 +291,14 @@
         ],
         "cmake": [
             "start ${cmake.bin}/cmake-gui.exe"
+        ],
+        "libtool": [
+            "cd /d ${root.prod}/AddLibraryTool/Windows",
+            "start ${root.prod}/AddLibraryTool/Windows/AddLibraryTool.exe"
+        ],
+        "apptool": [
+            "cd /d ${root.prod}/ProductExecTool/Windows",
+            "start ${root.prod}/ProductExecTool/Windows/ProductExecTool.exe"
         ],
         "build-opencv": [
             "cd /d R:/Develop/c0-buildstation/opencv2.3.1",
